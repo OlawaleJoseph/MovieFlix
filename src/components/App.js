@@ -1,6 +1,8 @@
+import Navbar from './NavBar';
+
 const App = () => (
   <div className="App">
-    <h1>Movieflix</h1>
+    <Navbar />
   </div>
 );
 
