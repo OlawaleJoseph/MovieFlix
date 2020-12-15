@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   root: {
     backgroundColor: 'transparent',
     transition: 'all 1s',
+    boxShadow: 'none',
   },
   logo: {
     width: '140px',
