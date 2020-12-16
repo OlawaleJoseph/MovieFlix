@@ -15,11 +15,10 @@ describe('Hero Section', () => {
     expect(hero).toMatchSnapshot();
   });
 
-  test('should have a movie description', () => {
+  test('should have a movie title and description', () => {
     const movieDescription = hero.find(Typography);
 
-    expect(movieDescription).toHaveLength(1);
-    expect(movieDescription.text()).toEqual(movieInfo.desc);
+    expect(movieDescription).toHaveLength(2);
   });
 
   test('should render play button', () => {

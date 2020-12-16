@@ -1,3 +1,11 @@
-/* eslint-disable import/prefer-default-export */
+export const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
 
-export const categories = [];
+const { REACT_APP_TMBD_API_KEY } = process.env;
+export const urls = {
+  originals: `/discover/tv?api_key=${REACT_APP_TMBD_API_KEY}&with_networks=213`,
+  moviePopular: `/movie/popular?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+  topRatedMovie: `/movie/top_rated?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+  upcoming: `/movie/upcoming?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+  popularTv: `/tv/popular?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+  topRatedTv: `/tv/top_rated?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+};

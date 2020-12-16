@@ -29,8 +29,12 @@ const MovieCard = ({ imgUrl }) => (
   </div>
 );
 
+MovieCard.defaultProps = {
+  imgUrl: '',
+};
+
 MovieCard.propTypes = {
-  imgUrl: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string,
 };
 
 export default MovieCard;
