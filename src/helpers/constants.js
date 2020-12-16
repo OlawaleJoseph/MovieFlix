@@ -8,4 +8,5 @@ export const urls = {
   upcoming: `/movie/upcoming?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
   popularTv: `/tv/popular?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
   topRatedTv: `/tv/top_rated?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
+  genresUrl: `/genre/movie/list?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US`,
 };

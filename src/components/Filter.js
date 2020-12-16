@@ -1,35 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormControl, InputLabel, makeStyles, MenuItem, Select,
-} from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 function Filter({ handleFilter, genres }) {
-  const classes = useStyles();
-
+  console.log('Genres', genres);
   return (
     <div className="d-flex align-items-center">
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Filter By Genre: </InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          name="genre"
-          onChange={handleFilter}
-        >
-          {['All', ...genres].map(genre => <MenuItem key={genre}>{genre}</MenuItem>)}
-        </Select>
-      </FormControl>
+      <div className="d-flex align-items-center">
+        <label htmlFor="categoryFilter" className="mr-3">
+          Genre:
+          <select className="form-control" name="categoryFilter" id="categoryFilter" onChange={handleFilter}>
+            {['All', ...genres].map(category => <option key={category}>{category}</option>)}
+          </select>
+        </label>
+      </div>
     </div>
   );
 }
