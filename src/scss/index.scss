@@ -1,2 +1,12 @@
 @import './reset.scss';
 @import './Navbar.scss';
+@import './MovieCard.scss';
+
+button {
+  margin: 10px;
+}
+
+img {
+  width: 100%;
+  max-height: 100%;
+}
