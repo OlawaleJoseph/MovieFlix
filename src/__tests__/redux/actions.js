@@ -1,5 +1,5 @@
 import filterAction from '../../actions/filter';
-import { FILTER_BOOK } from '../../actions/type';
+import { FILTER_BOOK, GET_GENRES, SET_MOVIE } from '../../actions/type';
 
 describe('Filter Action', () => {
   test('should generate an filter action', () => {
@@ -20,8 +20,21 @@ describe('Genre Action', () => {
     const genreObj = filterAction(genres);
 
     expect(genreObj).toEqual({
-      type: FILTER_BOOK,
+      type: GET_GENRES,
       payload: genres,
+    });
+    expect(genreObj).not.toEqual([]);
+  });
+});
+
+describe('Movie Action', () => {
+  test('should create action to set a movie', () => {
+    const movie = { id: 1, name: 'test movie' };
+    const genreObj = filterAction(movie);
+
+    expect(genreObj).toEqual({
+      type: SET_MOVIE,
+      payload: movie,
     });
     expect(genreObj).not.toEqual([]);
   });

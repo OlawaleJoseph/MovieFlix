@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 import { Grid, makeStyles } from '@material-ui/core';
@@ -104,7 +105,12 @@ function MovieRow({
         <Grid className={`${classes.container} scrollbar`} container spacing={3}>
           {allMovies?.map(({ id, imageUrl, name }) => (
             <Grid className={classes.itemRoot} item key={id}>
-              <MovieCard name={name} handleTrailerClick={handleTrailerClick} imgUrl={imageUrl} />
+              <MovieCard
+                id={id}
+                name={name}
+                handleTrailerClick={handleTrailerClick}
+                imgUrl={imageUrl}
+              />
             </Grid>
           ))}
         </Grid>
