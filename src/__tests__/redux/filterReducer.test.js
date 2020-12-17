@@ -5,7 +5,7 @@ describe('Movie Reducer', () => {
   test('Should return the default state', () => {
     const state = reducer(undefined, {});
 
-    expect(state).toEqual('0');
+    expect(state).toEqual(0);
   });
 
   test('Should return the new state with appropriate type', () => {

@@ -6,7 +6,7 @@ describe('Filter Component', () => {
 
   const filterProps = {
     handleFilter: filterMock,
-    genres: ['8'],
+    genres: [8],
     allGenres: [{ name: 'genre1', id: 0 }, { name: 'genre2', id: 1 }],
   };
 

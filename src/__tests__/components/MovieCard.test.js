@@ -1,15 +1,20 @@
 import { Button } from '@material-ui/core';
-import Card from '../../components/MovieCard';
+import { MovieCard } from '../../components/MovieCard';
 import shallowWrapper from '../../testSetup';
-
+// imgUrl, handleTrailerClick, name, setMovie, id, overview, releaseDate, genres,
 describe('Movie Card', () => {
   const movieInfo = {
     imgUrl: 'imageUrl',
     name: 'Test',
     handleTrailerClick: jest.fn(),
+    setMovie: jest.fn(),
+    id: 3,
+    overview: 'Movie Description',
+    releaseDate: '2020-12-10',
+    genres: [1, 2, 3, 4],
   };
 
-  const card = shallowWrapper(Card, movieInfo);
+  const card = shallowWrapper(MovieCard, movieInfo);
 
   test('should render', () => {
     expect(card).toBeTruthy();
