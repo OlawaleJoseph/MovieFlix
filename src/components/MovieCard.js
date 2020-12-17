@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MovieCard = ({ imgUrl }) => (
+const MovieCard = ({ imgUrl, handleTrailerClick, name }) => (
   <div className="movieCard">
     <div className="inner">
       <div className="front">
@@ -13,6 +13,7 @@ const MovieCard = ({ imgUrl }) => (
           variant="outlined"
           size="large"
           color="secondary"
+          onClick={() => handleTrailerClick(name)}
         >
           Trailer
         </Button>
@@ -35,6 +36,8 @@ MovieCard.defaultProps = {
 
 MovieCard.propTypes = {
   imgUrl: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  handleTrailerClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

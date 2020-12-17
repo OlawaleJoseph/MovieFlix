@@ -3,6 +3,8 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import movieTrailer from 'movie-trailer';
+import Youtube from 'react-youtube';
 import PropTypes from 'prop-types';
 import MovieCard from '../components/MovieCard';
 import Filter from '../components/Filter';
@@ -31,14 +33,18 @@ function MovieRow({
   const [movies, setMovies] = useState(null);
   const parentSectionId = useRef('');
   const [genres, setGenres] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState('');
   useEffect(async () => {
     const fetchMovies = async () => {
       const { data: { results } } = await fetch.get(moviesUrl);
 
-      return results.map(({ id, poster_path, genre_ids }) => ({
+      return results.map(({
+        id, poster_path, genre_ids, title, name,
+      }) => ({
         id,
         imageUrl: imageBaseUrl + poster_path,
         genreIds: genre_ids,
+        name: title || name,
       }));
     };
     try {
@@ -62,14 +68,33 @@ function MovieRow({
 
   const handleFilter = e => {
     const section = e.target.closest('section');
-    console.log(id, section.id);
     if (id === section.id) {
       moviesFilter(e.target.value);
       parentSectionId.current = section.id;
     }
   };
+
+  const handleTrailerClick = async name => {
+    if (trailerUrl) {
+      setTrailerUrl('');
+    } else {
+      try {
+        const url = await movieTrailer(name || '');
+        const urlParams = new URLSearchParams(new URL(url).search);
+        setTrailerUrl(urlParams.get('v'));
+      } catch (error) {
+        console.log('Url Error', error);
+      }
+    }
+  };
+
+  const youtubeOptions = {
+    height: '390',
+    width: '100%',
+    autoplay: 1,
+  };
+
   const allMovies = filterParam.toString() === '0' ? movies : setMoviesToDisplay();
-  console.log('All', allMovies, filterParam, id);
   return (
     <div className="container">
       <section id={id}>
@@ -86,13 +111,14 @@ function MovieRow({
           </Grid>
         </Grid>
         <Grid className={`${classes.container} scrollbar`} container spacing={3}>
-          {allMovies?.map(({ id, imageUrl }) => (
+          {allMovies?.map(({ id, imageUrl, name }) => (
             <Grid className={classes.itemRoot} item key={id}>
-              <MovieCard imgUrl={imageUrl} />
+              <MovieCard name={name} handleTrailerClick={handleTrailerClick} imgUrl={imageUrl} />
             </Grid>
           ))}
         </Grid>
       </section>
+      {trailerUrl && <Youtube videoId={trailerUrl} opts={youtubeOptions} />}
     </div>
   );
 }
