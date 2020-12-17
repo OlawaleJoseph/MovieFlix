@@ -1,6 +1,7 @@
 import {
   AppBar, Toolbar, makeStyles,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Logo from '../assets/images/logo.png';
 
@@ -36,7 +37,9 @@ const NavBar = () => {
   return (
     <AppBar className={`${classes.root} ${navBg ? 'Nav__show' : ''} max-width`} position="fixed">
       <Toolbar variant="dense">
-        <img className={classes.logo} src={Logo} alt="Brand logo" />
+        <Link to="/">
+          <img className={classes.logo} src={Logo} alt="Brand logo" />
+        </Link>
       </Toolbar>
     </AppBar>
   );

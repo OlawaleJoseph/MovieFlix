@@ -132,7 +132,7 @@ function MovieRow({
 MovieRow.propTypes = {
   title: PropTypes.string.isRequired,
   moviesUrl: PropTypes.string.isRequired,
-  filterParam: PropTypes.string.isRequired,
+  filterParam: PropTypes.number.isRequired,
   moviesFilter: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   allGenres: PropTypes.arrayOf(PropTypes.shape({

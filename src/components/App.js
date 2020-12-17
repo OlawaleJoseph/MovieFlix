@@ -4,6 +4,7 @@ import Navbar from './NavBar';
 import HomePage from '../pages/HomePage';
 // eslint-disable-next-line import/no-named-as-default
 import VideoPage from '../pages/VideoPage';
+import NotFound from '../pages/NotFound';
 
 const App = () => (
   <Router>
@@ -12,6 +13,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/movie" component={VideoPage} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   </Router>
