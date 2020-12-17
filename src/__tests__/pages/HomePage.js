@@ -1,25 +1,30 @@
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import Enzyme, { shallow } from 'enzyme';
 import HomePage from '../../pages/HomePage';
-import Row from '../../containers/MovieRow';
-import Banner from '../../components/Banner';
-import shallowWrapper from '../../testSetup';
+
+Enzyme.configure({ adapter: new Adapter() });
+
+const middleware = [thunk];
+const mockStore = configureMockStore(middleware);
+const store = mockStore();
 
 describe('Home page', () => {
-  const page = shallowWrapper(HomePage);
+  const opts = {
+    genres: [[{ name: test, id: 90 }]],
+    setGenres: jest.fn(),
+  };
+
+  const page = shallow(
+    <Provider store={store}>
+      <HomePage {...opts} />
+    </Provider>,
+  );
 
   test('should render home page', () => {
     expect(page).toBeTruthy();
     expect(page).toMatchSnapshot();
-  });
-
-  test('should render Banner', () => {
-    const movieDescription = page.find(Banner);
-
-    expect(movieDescription).toHaveLength(1);
-  });
-
-  test('should render Moview Row', () => {
-    const row = page.find(Row);
-
-    expect(row).toHaveLength(5);
   });
 });

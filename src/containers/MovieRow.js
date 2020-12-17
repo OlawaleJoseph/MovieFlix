@@ -3,14 +3,13 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import movieTrailer from 'movie-trailer';
 import Youtube from 'react-youtube';
 import PropTypes from 'prop-types';
 import MovieCard from '../components/MovieCard';
 import Filter from '../components/Filter';
 import fetch from '../helpers/data';
-import { imageBaseUrl } from '../helpers/constants';
-import { filterMovies } from '../helpers/common';
+import { imageBaseUrl, youtubeOptions } from '../helpers/constants';
+import { filterMovies, getYoutubeVideoId } from '../helpers/common';
 import filterAction from '../actions/filter';
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +32,7 @@ function MovieRow({
   const [movies, setMovies] = useState(null);
   const parentSectionId = useRef('');
   const [genres, setGenres] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState('');
+  const [trailerId, setTrailerId] = useState('');
   useEffect(async () => {
     const fetchMovies = async () => {
       const { data: { results } } = await fetch.get(moviesUrl);
@@ -54,8 +53,7 @@ function MovieRow({
       const uniqGenres = new Set(flattedGenresArr);
       setGenres([...uniqGenres]);
     } catch (error) {
-      console.log('Error occurred');
-      console.log(error);
+      console.log('Error occurred', error);
     }
   }, []);
 
@@ -75,23 +73,16 @@ function MovieRow({
   };
 
   const handleTrailerClick = async name => {
-    if (trailerUrl) {
-      setTrailerUrl('');
+    if (trailerId) {
+      setTrailerId('');
     } else {
       try {
-        const url = await movieTrailer(name || '');
-        const urlParams = new URLSearchParams(new URL(url).search);
-        setTrailerUrl(urlParams.get('v'));
+        const id = await getYoutubeVideoId(name);
+        setTrailerId(id);
       } catch (error) {
         console.log('Url Error', error);
       }
     }
-  };
-
-  const youtubeOptions = {
-    height: '390',
-    width: '100%',
-    autoplay: 1,
   };
 
   const allMovies = filterParam.toString() === '0' ? movies : setMoviesToDisplay();
@@ -118,7 +109,7 @@ function MovieRow({
           ))}
         </Grid>
       </section>
-      {trailerUrl && <Youtube videoId={trailerUrl} opts={youtubeOptions} />}
+      {trailerId && <Youtube videoId={trailerId} opts={youtubeOptions} />}
     </div>
   );
 }

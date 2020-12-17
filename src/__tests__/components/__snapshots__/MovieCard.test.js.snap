@@ -1,15 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hero Section should render Banner 1`] = `ShallowWrapper {}`;
-
-exports[`Hero Section should render Card 1`] = `ShallowWrapper {}`;
-
-exports[`Hero Section should render Movie Card 1`] = `ShallowWrapper {}`;
-
-exports[`Movie Card should have a image url 1`] = `ShallowWrapper {}`;
-
 exports[`Movie Card should render 1`] = `ShallowWrapper {}`;
-
-exports[`card Section should render Movie Card 1`] = `ShallowWrapper {}`;
-
-exports[`card Section should render Movie Card 2`] = `ShallowWrapper {}`;

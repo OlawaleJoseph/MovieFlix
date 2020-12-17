@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home page should render Movie page 1`] = `ShallowWrapper {}`;
-
 exports[`Home page should render home page 1`] = `ShallowWrapper {}`;
-
-exports[`Movie Row should render Movie Row 1`] = `ShallowWrapper {}`;
-
-exports[`Movie page should render Movie page 1`] = `ShallowWrapper {}`;

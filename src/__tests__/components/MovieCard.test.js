@@ -5,6 +5,8 @@ import shallowWrapper from '../../testSetup';
 describe('Movie Card', () => {
   const movieInfo = {
     imgUrl: 'imageUrl',
+    name: 'Test',
+    handleTrailerClick: jest.fn(),
   };
 
   const card = shallowWrapper(Card, movieInfo);

@@ -1,4 +1,3 @@
-import { InputLabel, MenuItem, Select } from '@material-ui/core';
 import Filter from '../../components/Filter';
 import shallowWrapper from '../../testSetup';
 
@@ -7,7 +6,8 @@ describe('Filter Component', () => {
 
   const filterProps = {
     handleFilter: filterMock,
-    genres: ['comedey', 'horror', 'sci-fi'],
+    genres: ['8'],
+    allGenres: [{ name: 'genre1', id: 0 }, { name: 'genre2', id: 1 }],
   };
 
   const filter = shallowWrapper(Filter, filterProps);
@@ -18,16 +18,16 @@ describe('Filter Component', () => {
   });
 
   test('should have select element with label', () => {
-    const filterLabel = filter.find(InputLabel);
-    const select = filter.find(Select);
-    const options = filter.find(MenuItem);
-    expect(filterLabel.text()).toEqual('Filter By Genre: ');
+    const filterLabel = filter.find('label');
+    const select = filter.find('select');
+    const options = filter.find('option');
+    expect(filterLabel.text()).toEqual('Genre:All');
     expect(select).toHaveLength(1);
-    expect(options).toHaveLength(filterProps.genres.length + 1);
+    expect(options).toHaveLength(1);
   });
 
   test('should call handle filter on selection change', () => {
-    const select = filter.find(Select);
+    const select = filter.find('select');
     select.simulate('change', { target: { value: 'comedy' } });
 
     expect(filterMock).toHaveBeenCalled();

@@ -10,3 +10,9 @@ export const urls = {
   topRatedTv: `/tv/top_rated?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US&page=1`,
   genresUrl: `/genre/movie/list?api_key=${REACT_APP_TMBD_API_KEY}&language=en-US`,
 };
+
+export const youtubeOptions = {
+  height: '450',
+  width: '100%',
+  autoplay: 1,
+};
