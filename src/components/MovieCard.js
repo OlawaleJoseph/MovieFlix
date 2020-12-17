@@ -6,12 +6,14 @@ import { useHistory } from 'react-router-dom';
 import setMovie from '../actions/movie';
 
 export const MovieCard = ({
-  imgUrl, handleTrailerClick, name, setMovie, id,
+  imgUrl, handleTrailerClick, name, setMovie, id, overview, releaseDate, genres,
 }) => {
   const history = useHistory();
   const handleClick = e => {
     e.preventDefault();
-    setMovie({ id, imgUrl, name });
+    setMovie({
+      id, imgUrl, name, overview, releaseDate, genres,
+    });
     history.push('/movie');
   };
 
@@ -34,7 +36,6 @@ export const MovieCard = ({
             variant="outlined"
             size="large"
             color="secondary"
-            // href="/movie"
             onClick={handleClick}
           >
             Details
@@ -56,11 +57,10 @@ MovieCard.propTypes = {
   handleTrailerClick: PropTypes.func.isRequired,
   setMovie: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  overview: PropTypes.string.isRequired,
+  releaseDate: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
-
-// const mapStateToProps = ({ movie }) => ({
-//   movie,
-// });
 
 const mapDispatchToProps = dispatch => ({
   setMovie: obj => dispatch(setMovie(obj)),

@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './mixins.scss';
 
 body {
   background-color: #111;
@@ -47,6 +48,19 @@ select:hover {
   display: flex;
 }
 
+.d-flex-x {
+  @include flex(center, flex-start);
+}
+
+.d-flex-center {
+  @include flex(center, center);
+}
+
 .align-items-center {
   align-items: center;
+}
+
+.max-width {
+  max-width: 1700px;
+  margin: auto;
 }

@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     backgroundColor: 'transparent',
     transition: 'all 1s',
     boxShadow: 'none',
+    left: 0,
   },
   logo: {
     width: '140px',
@@ -33,7 +34,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <AppBar className={`${classes.root} ${navBg ? 'Nav__show' : ''}`} position="fixed">
+    <AppBar className={`${classes.root} ${navBg ? 'Nav__show' : ''} max-width`} position="fixed">
       <Toolbar variant="dense">
         <img className={classes.logo} src={Logo} alt="Brand logo" />
       </Toolbar>

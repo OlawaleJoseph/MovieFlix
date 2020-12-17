@@ -9,7 +9,7 @@ export const filterMovies = (data, param) => {
 };
 
 export const getYoutubeVideoId = async name => {
-  const url = await movieTrailer(name || '');
+  const url = await movieTrailer(name);
   const urlParams = new URLSearchParams(new URL(url).search);
   return urlParams.get('v');
 };

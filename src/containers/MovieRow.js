@@ -39,14 +39,17 @@ function MovieRow({
       const { data: { results } } = await fetch.get(moviesUrl);
 
       return results.map(({
-        id, poster_path, genre_ids, title, name,
+        id, poster_path, genre_ids, title, name, overview, first_air_date, release_date,
       }) => ({
         id,
         imageUrl: imageBaseUrl + poster_path,
         genreIds: genre_ids,
         name: title || name,
+        overview,
+        releaseDate: first_air_date || release_date,
       }));
     };
+
     try {
       const data = await fetchMovies();
       setMovies(data);
@@ -103,13 +106,19 @@ function MovieRow({
           </Grid>
         </Grid>
         <Grid className={`${classes.container} scrollbar`} container spacing={3}>
-          {allMovies?.map(({ id, imageUrl, name }) => (
+          {allMovies?.map(({
+            id, imageUrl, name, overview, releaseDate, genreIds,
+          }) => (
             <Grid className={classes.itemRoot} item key={id}>
               <MovieCard
                 id={id}
                 name={name}
                 handleTrailerClick={handleTrailerClick}
                 imgUrl={imageUrl}
+                desc={overview}
+                releaseDate={releaseDate}
+                genres={genreIds}
+                overview={overview}
               />
             </Grid>
           ))}

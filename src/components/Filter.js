@@ -24,7 +24,7 @@ function Filter({ handleFilter, genres, allGenres }) {
 
 Filter.propTypes = {
   handleFilter: PropTypes.func.isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.number).isRequired,
   allGenres: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

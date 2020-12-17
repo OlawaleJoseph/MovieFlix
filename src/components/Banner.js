@@ -34,7 +34,7 @@ const Banner = () => {
       background: `url('${bgImg}') no-repeat center`,
       backgroundSize: 'cover',
       width: '100%',
-      height: '450px',
+      height: '600px',
       paddingTop: theme.spacing(6),
     },
     content: {
