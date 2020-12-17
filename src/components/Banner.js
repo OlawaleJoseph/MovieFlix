@@ -1,17 +1,21 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Youtube from 'react-youtube';
 import {
   makeStyles, Grid, Typography, Button,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { generateRandowmNumber, getYoutubeVideoId } from '../helpers/common';
 import { urls, imageBaseUrl, youtubeOptions } from '../helpers/constants';
 import fetch from '../helpers/data';
+import setMovie from '../actions/movie';
 
-const Banner = () => {
+export const Banner = ({ updateMovie }) => {
   const [movie, setMovie] = useState(null);
   const [trailerId, setTrailerId] = useState('');
+  const history = useHistory();
   useEffect(async () => {
     const fetchMovies = async () => {
       const { data: { results } } = await fetch.get(urls.originals);
@@ -26,6 +30,19 @@ const Banner = () => {
       console.log('Error occurred', error);
     }
   }, []);
+
+  const handleClick = () => {
+    const bannerMovie = {
+      name: movie.name,
+      genres: movie.genre_ids,
+      releaseDate: movie.first_air_date,
+      overview: movie.overview,
+      imgUrl: imageBaseUrl + movie.poster_path,
+      id: movie.id,
+    };
+    updateMovie(bannerMovie);
+    history.push('/movie');
+  };
 
   const bgImg = imageBaseUrl + movie?.backdrop_path;
 
@@ -65,9 +82,9 @@ const Banner = () => {
   };
 
   const classes = styles();
-
+  console.log('Banner', trailerId);
   return (
-    trailerId ? <Youtube onEnd={setTrailerId('')} videoId={trailerId} opts={youtubeOptions} />
+    trailerId ? (<Youtube videoId={trailerId} opts={youtubeOptions} />)
       : (
         <div className={classes.bg}>
           <Grid container alignItems="center" className={classes.content}>
@@ -93,16 +110,25 @@ const Banner = () => {
                   variant="outlined"
                   size="large"
                   color="secondary"
+                  onClick={handleClick}
                 >
                   Details
                 </Button>
               </div>
             </Grid>
           </Grid>
-          {trailerId && <Youtube onEnd={setTrailerId('')} videoId={trailerId} opts={youtubeOptions} />}
+          {trailerId && <Youtube videoId={trailerId} opts={youtubeOptions} />}
         </div>
       )
   );
 };
 
-export default Banner;
+Banner.propTypes = {
+  updateMovie: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateMovie: obj => dispatch(setMovie(obj)),
+});
+
+export default connect(null, mapDispatchToProps)(Banner);

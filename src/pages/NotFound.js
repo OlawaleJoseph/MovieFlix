@@ -2,7 +2,6 @@ import React from 'react';
 import '../scss/NotFound.scss';
 
 function NotFound() {
-  console.log('Not Found');
   return (
     <div className="notfound">
       <span><i className="fa fa-chain-broken fa-5" /></span>

@@ -10,7 +10,7 @@ Enzyme.configure({ adapter: new Adapter() });
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 const store = mockStore({
-  filter: 'All',
+  filter: 0,
   genre: [{ name: 'All', id: 0 }],
 });
 
@@ -21,7 +21,6 @@ describe.only('Movie Row', () => {
     id: 'movieId',
     allGenres: [{ name: 'All', id: 0 }, { name: 'Horror', id: 12 }],
   };
-  // title, moviesUrl, filterParam, moviesFilter, id, allGenres,
 
   const row = mount(
     <Provider store={store}>
