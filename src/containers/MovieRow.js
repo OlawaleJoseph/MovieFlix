@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 import { Grid, makeStyles } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieCard from '../components/MovieCard';
@@ -24,11 +25,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 function MovieRow({
-  title, moviesUrl, filterParam, moviesFilter, id,
+  title, moviesUrl, filterParam, moviesFilter, id, allGenres,
 }) {
   const classes = useStyles();
   const [movies, setMovies] = useState(null);
-  const [parentSection, setParentsection] = useState('');
+  const parentSectionId = useRef('');
   const [genres, setGenres] = useState([]);
   useEffect(async () => {
     const fetchMovies = async () => {
@@ -43,28 +44,32 @@ function MovieRow({
     try {
       const data = await fetchMovies();
       setMovies(data);
-      setGenres(data.map(({ genreIds }) => genreIds).flat());
+      const flattedGenresArr = data.map(({ genreIds }) => (genreIds)).flat();
+      const uniqGenres = new Set(flattedGenresArr);
+      setGenres([...uniqGenres]);
     } catch (error) {
       console.log('Error occurred');
       console.log(error);
     }
   }, []);
 
-  const handleFilter = e => {
-    const section = e.target.closest('section');
-    if (id === section.id) {
-      moviesFilter(e.target.value);
-      setParentsection(section);
+  const setMoviesToDisplay = () => {
+    if (parentSectionId.current === id) {
+      return filterMovies(movies, filterParam);
     }
-  };
-
-  const setMoviesToDisplay = parent => {
-    if (parent.id === id) return filterMovies(movies, filterParam);
     return movies;
   };
 
-  const allMovies = setMoviesToDisplay(parentSection);
-
+  const handleFilter = e => {
+    const section = e.target.closest('section');
+    console.log(id, section.id);
+    if (id === section.id) {
+      moviesFilter(e.target.value);
+      parentSectionId.current = section.id;
+    }
+  };
+  const allMovies = filterParam.toString() === '0' ? movies : setMoviesToDisplay();
+  console.log('All', allMovies, filterParam, id);
   return (
     <div className="container">
       <section id={id}>
@@ -73,7 +78,11 @@ function MovieRow({
             <h5 className="section__heading">{title}</h5>
           </Grid>
           <Grid item>
-            <Filter handleFilter={handleFilter} genres={genres} />
+            <Filter
+              allGenres={allGenres}
+              handleFilter={handleFilter}
+              genres={genres}
+            />
           </Grid>
         </Grid>
         <Grid className={`${classes.container} scrollbar`} container spacing={3}>
@@ -94,6 +103,10 @@ MovieRow.propTypes = {
   filterParam: PropTypes.string.isRequired,
   moviesFilter: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  allGenres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = state => ({
