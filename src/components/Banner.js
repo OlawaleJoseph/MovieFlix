@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Youtube from 'react-youtube';
@@ -18,7 +17,9 @@ export const Banner = ({ updateMovie }) => {
   const history = useHistory();
   useEffect(async () => {
     const fetchMovies = async () => {
-      const { data: { results } } = await fetch.get(urls.originals);
+      const {
+        data: { results },
+      } = await fetch.get(urls.originals);
       const index = generateRandowmNumber(results.length);
 
       return results[index];
@@ -27,8 +28,9 @@ export const Banner = ({ updateMovie }) => {
       const data = await fetchMovies();
       setMovie(data);
     } catch (error) {
-      console.log('Error occurred', error);
+      return null;
     }
+    return false;
   }, []);
 
   const handleClick = () => {
@@ -76,50 +78,47 @@ export const Banner = ({ updateMovie }) => {
         const id = await getYoutubeVideoId(movie.name);
         setTrailerId(id);
       } catch (error) {
-        console.log('Url Error', error);
+        return null;
       }
     }
+    return null;
   };
 
   const classes = styles();
-  console.log('Banner', trailerId);
-  return (
-    trailerId ? (<Youtube videoId={trailerId} opts={youtubeOptions} />)
-      : (
-        <div className={classes.bg}>
-          <Grid container alignItems="center" className={classes.content}>
-            <Grid item xs={10} md={5} lg={4}>
-              <Typography variant="h4" className={classes.heading}>
-                {movie?.name}
-              </Typography>
-              <Typography variant="body2">
-                {movie?.overview}
-              </Typography>
-              <div className={classes.btnContainer}>
-                <Button
-                  className={classes.btn}
-                  variant="outlined"
-                  size="large"
-                  color="secondary"
-                  onClick={handleTrailerClick}
-                >
-                  Play
-                </Button>
-                <Button
-                  className={classes.btn}
-                  variant="outlined"
-                  size="large"
-                  color="secondary"
-                  onClick={handleClick}
-                >
-                  Details
-                </Button>
-              </div>
-            </Grid>
-          </Grid>
-          {trailerId && <Youtube videoId={trailerId} opts={youtubeOptions} />}
-        </div>
-      )
+  return trailerId ? (
+    <Youtube videoId={trailerId} opts={youtubeOptions} />
+  ) : (
+    <div className={classes.bg}>
+      <Grid container alignItems="center" className={classes.content}>
+        <Grid item xs={10} md={5} lg={4}>
+          <Typography variant="h4" className={classes.heading}>
+            {movie?.name}
+          </Typography>
+          <Typography variant="body2">{movie?.overview}</Typography>
+          <div className={classes.btnContainer}>
+            <Button
+              className={classes.btn}
+              variant="outlined"
+              size="large"
+              color="secondary"
+              onClick={handleTrailerClick}
+            >
+              Play
+            </Button>
+            <Button
+              className={classes.btn}
+              variant="outlined"
+              size="large"
+              color="secondary"
+              onClick={handleClick}
+            >
+              Details
+            </Button>
+          </div>
+        </Grid>
+      </Grid>
+      {trailerId && <Youtube videoId={trailerId} opts={youtubeOptions} />}
+    </div>
   );
 };
 

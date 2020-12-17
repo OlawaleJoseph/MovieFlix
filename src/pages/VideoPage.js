@@ -21,8 +21,9 @@ export const VideoPage = ({ movie, allGenres }) => {
       const videoId = await getYoutubeVideoId(name);
       setTrailerId(videoId);
     } catch (error) {
-      console.log(error);
+      return null;
     }
+    return false;
   });
 
   const genresArr = genres?.map(id => (
