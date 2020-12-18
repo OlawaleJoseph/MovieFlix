@@ -44,7 +44,10 @@ This is a web application that displays Movies and TV series based on different 
 | stylelint-csstree-validator     | Advanced linting validation for css                              |
 | stylelint-scss                  | Adds additional SCSS-related rules to StyleLint                  |
 
-
+## Prerequisites
+- TMDB API KEY
+- Internet
+- Computer
 
 
 ### Install and Setup
