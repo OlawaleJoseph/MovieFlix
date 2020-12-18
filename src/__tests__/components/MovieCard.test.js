@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { MovieCard } from '../../components/MovieCard';
 import shallowWrapper from '../../testSetup';
-// imgUrl, handleTrailerClick, name, setMovie, id, overview, releaseDate, genres,
+
 describe('Movie Card', () => {
   const movieInfo = {
     imgUrl: 'imageUrl',
@@ -18,19 +18,23 @@ describe('Movie Card', () => {
 
   test('should render', () => {
     expect(card).toBeTruthy();
+    expect(card).not.toBeFalsy();
     expect(card).toMatchSnapshot();
   });
 
   test('should have a image url', () => {
     const image = card.find('img');
     expect(image.prop('src')).toEqual(movieInfo.imgUrl);
+    expect(image.prop('src')).not.toEqual('');
   });
 
   test('should render Trailer button', () => {
     const buttons = card.find(Button);
 
     expect(buttons).toHaveLength(2);
+    expect(buttons).not.toHaveLength(0);
     expect(buttons.first().text()).toContain('Trailer');
+    expect(buttons.first().text()).not.toBeNull();
   });
 
   test('should render details button', () => {
@@ -38,5 +42,6 @@ describe('Movie Card', () => {
 
     expect(buttons).toHaveLength(2);
     expect(buttons.last().text()).toContain('Details');
+    expect(buttons.last().text()).not.toBeNull();
   });
 });

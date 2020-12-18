@@ -6,6 +6,7 @@ describe('NOT Found PAge', () => {
 
   test('should render page', () => {
     expect(page).toBeTruthy();
+    expect(page).not.toBeFalsy();
     expect(page).toMatchSnapshot();
   });
 
@@ -13,5 +14,6 @@ describe('NOT Found PAge', () => {
     const heading = page.find('h1');
 
     expect(heading.text()).toEqual('Page Not Found');
+    expect(heading.text()).not.toBeNull();
   });
 });

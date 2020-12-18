@@ -14,6 +14,7 @@ describe('Filter Component', () => {
 
   test('should render', () => {
     expect(filter).toBeTruthy();
+    expect(filter).not.toBeNull();
     expect(filter).toMatchSnapshot();
   });
 
@@ -22,8 +23,11 @@ describe('Filter Component', () => {
     const select = filter.find('select');
     const options = filter.find('option');
     expect(filterLabel.text()).toEqual('Genre:All');
+    expect(filterLabel.text()).not.toEqual('');
     expect(select).toHaveLength(1);
+    expect(select).not.toHaveLength(0);
     expect(options).toHaveLength(1);
+    expect(options).not.toBeNull();
   });
 
   test('should call handle filter on selection change', () => {

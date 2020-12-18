@@ -11,6 +11,7 @@ describe('Hero Section', () => {
 
   test('should render Banner', () => {
     expect(hero).toBeTruthy();
+    expect(hero).not.toBeFalsy();
     expect(hero).toMatchSnapshot();
   });
 
@@ -18,19 +19,23 @@ describe('Hero Section', () => {
     const movieDescription = hero.find(Typography);
 
     expect(movieDescription).toHaveLength(2);
+    expect(movieDescription).not.toHaveLength(0);
   });
 
   test('should render play button', () => {
     const buttons = hero.find(Button);
 
     expect(buttons).toHaveLength(2);
+    expect(buttons).not.toHaveLength(0);
     expect(buttons.first().text()).toContain('Play');
+    expect(buttons.first().text()).not.toContain('Another');
   });
 
   test('should render play button', () => {
     const buttons = hero.find(Button);
 
     expect(buttons).toHaveLength(2);
-    expect(buttons.last().text()).toContain('Details');
+    expect(buttons).not.toHaveLength(0);
+    expect(buttons.last().text()).toContain('');
   });
 });

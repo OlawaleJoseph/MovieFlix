@@ -25,6 +25,7 @@ describe('Home page', () => {
 
   test('should render home page', () => {
     expect(page).toBeTruthy();
+    expect(page).not.toBeFalsy();
     expect(page).toMatchSnapshot();
   });
 });

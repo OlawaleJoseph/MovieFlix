@@ -30,6 +30,7 @@ describe.only('Movie Row', () => {
 
   test('should render Movie Row', () => {
     expect(row).toBeTruthy();
+    expect(row).not.toBeFalsy();
     expect(row).toMatchSnapshot();
   });
 
@@ -37,6 +38,8 @@ describe.only('Movie Row', () => {
     const movieDescription = row.find('.section__heading');
 
     expect(movieDescription).toHaveLength(1);
+    expect(movieDescription).not.toHaveLength(0);
     expect(movieDescription.text()).toEqual(rowInfo.title);
+    expect(movieDescription.text()).not.toEqual('');
   });
 });
