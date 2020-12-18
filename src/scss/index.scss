@@ -1,0 +1,15 @@
+@import './reset.scss';
+@import './default.scss';
+@import './Navbar.scss';
+@import './MovieCard.scss';
+@import './Scrollbar.scss';
+@import './headings.scss';
+@import './VideoPage.scss';
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  margin: 10px;
+}
