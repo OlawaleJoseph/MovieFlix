@@ -56,7 +56,7 @@ function MovieRow({
       const flattedGenresArr = data.map(({ genreIds }) => (genreIds)).flat();
       const uniqGenres = new Set(flattedGenresArr);
       setGenres([...uniqGenres]);
-    } catch (error) {
+    } catch {
       return null;
     }
   }, []);
@@ -83,7 +83,7 @@ function MovieRow({
       try {
         const id = await getYoutubeVideoId(name);
         setTrailerId(id);
-      } catch (error) {
+      } catch {
         return null;
       }
     }

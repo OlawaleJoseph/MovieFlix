@@ -27,7 +27,7 @@ export const Banner = ({ updateMovie }) => {
     try {
       const data = await fetchMovies();
       setMovie(data);
-    } catch (error) {
+    } catch {
       return null;
     }
     return false;
@@ -77,7 +77,7 @@ export const Banner = ({ updateMovie }) => {
       try {
         const id = await getYoutubeVideoId(movie.name);
         setTrailerId(id);
-      } catch (error) {
+      } catch {
         return null;
       }
     }

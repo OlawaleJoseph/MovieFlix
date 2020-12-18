@@ -20,7 +20,7 @@ export const VideoPage = ({ movie, allGenres }) => {
     try {
       const videoId = await getYoutubeVideoId(name);
       setTrailerId(videoId);
-    } catch (error) {
+    } catch {
       return null;
     }
     return false;
