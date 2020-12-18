@@ -51,12 +51,14 @@ This is a web application that displays Movies and TV series based on different 
 
 
 ### Install and Setup
-
 - Clone repo to your local `git@github.com:OlawaleJoseph/MovieFlix.git`
 - cd into the cloned repo
+- Obtain [TMDB](https://www.themoviedb.org/) API KEY
+- Create a .env file in the root of the repository
+- Add all necessary environment variables to .env file (Check .env.sample file for required variables)
 - Open a terminal in the root of the app
 - Run `npm install` to install dependencies
-- Run Start up you server with `npm run start`
+- Run Start up your server with `npm run start`
 - Open http://localhost:3000/ in your browser.
 
 ### Testing
