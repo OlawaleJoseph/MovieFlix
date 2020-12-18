@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page should render home page 1`] = `ShallowWrapper {}`;
+
+exports[`NOT Found PAge should render home page 1`] = `ShallowWrapper {}`;
+
+exports[`NOT Found PAge should render page 1`] = `ShallowWrapper {}`;
